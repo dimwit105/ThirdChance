@@ -1,0 +1,93 @@
+#Please note, there are no failsafes in the code, if you configure something that doesnt make sense, strange things will happen.
+GeneralOptions:
+  #If a players current health is under this when attacked, they'll instantly die instead of being downed.
+  #-20 means a player at 20 health needs 40 damage in one hit to instantly die, while -5 only needs 25
+  OverKill: -20
+  #Should leftover damage bleed through to downed health? The damage dealt to downed health is modified by incoming multiplier
+  BleedThrough: true
+DownedOptions:
+  #How fast should players walk while down, this doesnt affect swimming speed.
+  CrawlSpeed: 0.07
+  #Should players aquire the glowing potion effect?
+  Glow: true
+  #Seconds of resistance 5 to apply to players as they get downed. This makes them impervious to all damage for the duration. 0.0 Disables
+  Resistance: 3.1
+  #Should the regeneration buff be removed when down? Note: This doesn't affect regeneration being removed when damaged while down, just the hit downing the player
+  RemoveRegeneration: true
+  #Should players be invisible to monsters while down?
+  MobInvisibility: false
+  #Multiplier applied to damage to/from a downed player. A multiplier of 0 cancels the attack entirely.
+  Damage:
+    Outgoing: 0.0
+    #This only multiplies damage coming from other entities, environmental damage is unaffected.
+    Incoming: 0.5
+ReviveOptions:
+  #Should the revived player recieve absorption so they're not immediately downed again (aka sandbagged)
+  Absorption:
+    Enabled: true
+    Length: 7
+    #Strength of the absorption Note: potion power starts at 0, setting this to 1 applies Absorption II
+    Power: 1
+  #Should players be revived by thrown instant health potions? This can allow self revives if true
+  ThrowRevive: false
+  #Should a kill revive a player?
+  KillRevive: false
+  #How likely is a player to revive themselves? This is a percentage, with 1.0 being 100%
+  SelfReviveChance: 0.05
+  #Options on how much health to give after a successful revive
+  Health:
+    #Flat number with 1 being a half-heart
+    Flat: 6.0
+    Percentage:
+      #Should we use a percentage of maximum health instead? Useful if players can have more than 10 hearts
+      Enabled: false
+      #What percentage? Remember: 1.0 means 100%
+      Amount: 0.3
+  #Should we delay the revive in some way? 
+  Delay:
+    #This has several options:
+    #REGENERATION: Applies regeneration to the target, allowing them to heal and reviving them when theyre at full health
+    #TIME: Applies regeneration to the target, reviving them when the time is up if regeneration is still active
+    #NONE: Instantly revives the target
+    #With any option, the regeneration buff is removed when a downed player is damaged.
+    Type: REGENERATION
+    #For TIME setting, how long will the revive take, for REGENERATION setting, how long will the regeneration last
+    Time: 30
+    #For REGENERATION setting, how strong will the buff be?
+    Power: 1
+CooldownOptions:
+  Cooldown:
+    #Should a cooldown be enforced, stopping players from going down again within a certain amount of minutes?
+    Enabled: false
+    #For how many minutes?
+    Time: 2.0
+    #Should the cooldown be cancelled when you heal?
+    CanceledByHeal: false
+  #How long should we wait before a down is forgiven (in minutes)
+  DownResetTime: 15.0
+BleedingOptions:
+  Health:
+    #How much health should a freshly downed player recieve?
+    Downed: 20.0
+    #How long do we wait between damage ticks?
+    Decay: 3
+    #Whats the base damage of the bleedout tick?
+    BaseDamage: 1.0
+    #What should we ADD to the down multiplier for each down?
+    #Note this is ADD, not multiply. 
+    #The first down will always be 1.0, the second down will be 1.0 + DownIncreaseMultiplier. The second is 1.0 + (DownIncreaseMultiplier*2)
+    #This continues, and does not have a cap, set to 0 to disable.
+    DownIncreaseMultiplier: 1.0
+    #How to interpret the DownIncreaseMultiplier. Two options exist
+    #DAMAGE: This multiples the damage by DownIncreaseMultiplier. Meaning the second down will do double damage if DownIncreaseMultiplier is 1.0, Triple the third, Quadruple the fourth...    
+    #HEALTH: This will subtract DownIncreaseMultiplier*BaseDamage from the downed health, essentially removing one tick from their healthbar. 
+    #This is calculated before they're punished for their current down, meaning the first down is the configured downed health, but consecutive downs are Downed - (DownIncreaseMultiplier*BaseDamage)
+    #PERSISTENT: This will keep track of the players health when downed, and will set their downed health to whatever the lowest value was when they were downed. The health is restored over time regenerating 20 hitpoints over DownResetTime minutes.
+    DownPunishmentType: DAMAGE
+    Percentage:
+      #Should we use percentages for downed health/damage. This keeps the time to bleedout consistent across all health values, be it 10 hearts or 200 hearts
+      #Again, 1.0 = 100% 0.05 = 5%
+      #This may manifest in weird ways for players with less than 10 hearts, but they will still be damaged appropriately even if they don't take enough damage for it to display on their HUD
+      Enabled: false
+      Downed: 1.0
+      BaseDamage: 0.05

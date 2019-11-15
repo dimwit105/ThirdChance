@@ -1,0 +1,10 @@
+name: ThirdChance
+main: com.blaxout1213.SecondChanceReborn.SecondChanceReborn
+version: 2.1
+commands:
+   thirdchance:
+      description: Displays version
+      usage: /thirdchance
+   giveup:
+      description: Kills yourself when you need a revive
+      usage: /giveup

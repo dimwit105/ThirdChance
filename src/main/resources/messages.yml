@@ -1,0 +1,52 @@
+#Should announcements be sent to players
+Announcements:
+  Enabled: true
+  #Should the custom bleedout messages be used if a player ticks out while down?
+  BleedOutMessagesEnabled: true
+  #Should the Message -> Death text be used?
+  DeathAnnounce: false
+  #How far to send messages/titles
+  Range: 256
+  #Should we use titles? If false, will use standard player chat.
+  Title:
+    Enabled: false
+    #Fade in / sustain / fade out times, in seconds
+    FadeIn: 0.5
+    Time: 5
+    FadeOut: 0.5
+  Messages:
+  #Customizable messages for everything $ represents the section symbol, allowing for colors
+  #If a message starts with %, it will need a pair of ' surrounding it
+    Downed: $4%p has been incapacitated!
+    Revived: $1%p has been revived!
+    SelfRevive: $1%p is too stubborn to die!
+    Death: $8No one revived %p.
+    ReviveIncoming: You will be revived in %s seconds
+    ReviveHeal: You will be revived when you reach full health
+    ReviveCancelled: Damage taken, revive has been cancelled
+    ReviveOther: '%p is being revived!'
+    #Custom messages for when a player dies to a bleedout tick, these will replace the default messages
+    BleedOut:
+      CONTACT: '%p bled out after hugging a cactus.'
+      DRAGON_BREATH: '%p bled out after being burnt by the dragon.'
+      DROWNING: '%p had too much water in their lungs'
+      ENTITY_ATTACK: '%p bled out after being attacked.'
+      EXPLODE: '%p bled out after an explosion.'
+      FALL: '%p bled out after falling.'
+      FALLING_BLOCK: '%p bled out after being crushed.'
+      FIRE: '%p finally burned away.'
+      FLY_INTO_WALL: '%p bled out after smashing a wall.'
+      HOT_FLOOR: '%p bled out after stepping on magma.'
+      LAVA: '%p finally burned away after a lava encounter.'
+      LIGHTNING: '%p bled out after being struck by lightning.'
+      MAGIC: '%p bled out after magic happened.'
+      POISON: '%p succomed to the poison.'
+      PROJECTILE: '%p bled out after being shot.'
+      STARVATION: '%p finally starved.'
+      SUFFOCATION: '%p couldn''t expel the blocks from their lungs.'
+      SUICIDE: '%p finally ended it.'
+      THORNS: '%p bled out after hitting thorny armor.'
+      VOID: '%p had the void stare back at it.'
+      WITHER: '%p finally withered away.'
+      UNKNOWN: '%p bled out.'
+      Killer: '%k finally killed %p.'
